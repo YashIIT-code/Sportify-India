@@ -13,9 +13,11 @@ export default function HomePage() {
   const topRated = useMemo(() => [...academies].sort((a, b) => b.rating - a.rating).slice(0, 8), []);
   const affordable = useMemo(() => [...academies].sort((a, b) => a.fees - b.fees).slice(0, 4), []);
 
-  const greeting = useMemo(() => {
+  const [greeting, setGreeting] = useState('');
+
+  useEffect(() => {
     const h = new Date().getHours();
-    return h < 12 ? 'Good Morning' : h < 17 ? 'Good Afternoon' : 'Good Evening';
+    setGreeting(h < 12 ? 'Good Morning' : h < 17 ? 'Good Afternoon' : 'Good Evening');
   }, []);
 
   return (
@@ -23,7 +25,7 @@ export default function HomePage() {
       {/* Hero */}
       <section className="hero">
         <div className="hero-content">
-          <p className="hero-greeting">{greeting}{user ? `, ${user.displayName?.split(' ')[0]}` : ''} 👋</p>
+          <p className="hero-greeting">{greeting ? `${greeting}${user ? `, ${user.displayName?.split(' ')[0]}` : ''} 👋` : '\u00A0'}</p>
           <h1 className="hero-title">Find Your Perfect<br/>Sports Academy</h1>
           <p className="hero-subtitle">Discover the best coaching near you in Delhi NCR — Football, Cricket, Tennis & Badminton</p>
           <div className="hero-search">

@@ -1,12 +1,12 @@
 'use client';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import AcademyCard from '../../components/AcademyCard';
 import SearchBar from '../../components/SearchBar';
 import FilterSidebar from '../../components/FilterSidebar';
 import { academies } from '../../data/academies';
 
-export default function AcademiesPage() {
+function AcademiesContent() {
   const searchParams = useSearchParams();
   const initialSport = searchParams.get('sport');
   const initialQuery = searchParams.get('q') || '';
@@ -68,5 +68,13 @@ export default function AcademiesPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function AcademiesPage() {
+  return (
+    <Suspense fallback={<div className="container" style={{ padding: '80px 20px', textAlign: 'center' }}>Loading Academies...</div>}>
+      <AcademiesContent />
+    </Suspense>
   );
 }

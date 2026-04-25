@@ -10,21 +10,17 @@ export function FavoritesProvider({ children }) {
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
-    if (user) {
-      getUserFavorites(user.uid).then(setFavorites).catch(console.error);
-    } else {
-      setFavorites([]);
-    }
+    getUserFavorites(user ? user.uid : 'anon').then(setFavorites).catch(console.error);
   }, [user]);
 
   const addFavorite = useCallback(async (academyId) => {
     setFavorites(prev => [...prev, academyId]);
-    if (user) await addFav(user.uid, academyId);
+    await addFav(user ? user.uid : 'anon', academyId);
   }, [user]);
 
   const removeFavorite = useCallback(async (academyId) => {
     setFavorites(prev => prev.filter(id => id !== academyId));
-    if (user) await removeFav(user.uid, academyId);
+    await removeFav(user ? user.uid : 'anon', academyId);
   }, [user]);
 
   const toggleFavorite = useCallback(async (academyId) => {
