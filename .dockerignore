@@ -1,0 +1,56 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Dependencies
+node_modules
+npm-debug.log
+npm-error.log
+yarn.error.log
+yarn-debug.log
+.pnp
+.pnp.js
+
+# Development
+.next
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.circleci
+
+# Build outputs
+dist
+build
+out
+
+# Testing
+coverage
+.nyc_output
+jest.config.js
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Misc
+README.md
+LICENSE
+.babelrc
+.eslintrc
+.prettierrc
+tsconfig.json
+next.config.mjs
